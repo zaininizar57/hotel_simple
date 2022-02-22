@@ -1,0 +1,105 @@
+/* register */
+
+.container-modal-register {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(46, 39, 39, 0.3);
+}
+
+.container-modal-register.active {
+  display: flex !important;
+}
+
+.modal-register {
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  width: 0px;
+  height: 0px;
+}
+
+#btn-close-x {
+  cursor: pointer;
+}
+
+.modal-register div {
+  animation-name: fade-text;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+/* login */
+
+.container-modal-login {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(46, 39, 39, 0.3);
+}
+
+.container-modal-login.active {
+  display: flex !important;
+}
+
+.modal-login {
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  width: 0px;
+  height: 0px;
+}
+
+#btn-close-x {
+  cursor: pointer;
+}
+
+.modal-login div {
+  animation-name: fade-text;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+@keyframes fade-in {
+  0% {
+    width: 0px;
+    height: 0px;
+  }
+  100% {
+    width: 32rem;
+    height: 32rem;
+  }
+}
+
+@keyframes fade-text {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  50% {
+    display: none;
+    opacity: 0;
+  }
+  100% {
+    display: block !important;
+    opacity: 1;
+  }
+}
