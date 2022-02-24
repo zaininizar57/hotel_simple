@@ -1,3 +1,9 @@
+<?php 
+
+    session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +17,11 @@
 </head>
 
 <body>
+
+    <script>
+    let isOpenModalRegister = false;
+    let isOpenModalLogin = false;
+    </script>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container py-2">
@@ -36,6 +47,20 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <?php if(isset($_SESSION['auth'])): ?>
+                    <li class="nav-link">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= $_SESSION['auth']['nama_lengkap'] ?>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="auth/logout.php">log out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <?php else: ?>
                     <li class=" nav-link">
                         <button id="btn-modal-register"
                             class="nav-link btn px-4 text-white btn-primary">Register</button>
@@ -43,6 +68,7 @@
                     <li class="nav-link">
                         <button id="btn-modal-login" class="nav-link btn btn-outline-primary px-4">Login</button>
                     </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -203,8 +229,58 @@
         </div>
     </footer>
 
-    <div class="container-modal-test" id="modal-register">
-        <div class="modal-test card">
+    <div class="container-modal-register" id="modal-register">
+        <?php 
+                    
+            if (isset($_GET['errors'])) {
+                ?>
+
+        <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
+
+            <?php
+                    $errors = $_GET['errors'];
+
+                    $error_messages = explode(',', $errors);
+
+                    foreach($error_messages as $err){
+                        echo '<div class="text-white capitalize" style="font-size: 12px;">' . $err . '</div>';
+                    }
+
+                    echo '<script>
+                            isOpenModalRegister = true;
+                        </script>';
+
+                    ?>
+        </div>
+
+        <?php
+
+                }
+            
+            ?>
+        <?php 
+
+if (isset($_GET['response'])) {
+    ?>
+
+        <div class="alert alert-success" style="width: 32rem;">
+            <?php
+
+                    $response = $_GET['response'];
+                    
+                    echo '<div class="capitalize" style="font-size: 12px;">' . $response . '</div>';
+
+                    echo '<script>
+                            isOpenModalRegister = true;
+                        </script>';
+
+                        ?>
+        </div>
+        <?php
+                }
+            
+            ?>
+        <div class="modal-register card">
             <div class="card-header d-flex align-items-center justify-content-between px-4 py-2">
                 <span class="fs-5">Registrasi</span>
                 <svg id="btn-close-x" style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -213,35 +289,64 @@
                 </svg>
             </div>
             <div class="card-body px-4">
-                <form>
+                <form action="auth/register.php" method="post">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input name="nama_lengkap" type="text" class="form-control" id="exampleInputEmail1">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Alamat Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input name="email" type="email" class="form-control" id="exampleInputEmail1">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input name="password" type="password" class="form-control" id="exampleInputPassword1">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Konfirmasi
                             Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input name="conf_password" type="password" class="form-control" id="exampleInputPassword1">
                     </div>
                     <div class="flex align-items-center py-2">
-                        <div id="btn-modal-close" class="btn btn-secondary px-4">Close</div>
-                        <button type="submit" class="btn btn-primary px-4">Daftar</button>
+                        <!-- <div id="btn-modal-close" class="btn btn-secondary px-4">Close</div> -->
+                        <button name="register" type="submit" class="btn btn-primary px-4">Daftar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="container-modal-test" id="modal-login">
-        <div class="modal-test card" style="height: 24rem !important;">
+
+    <div class="container-modal-login" id="modal-login">
+        <?php 
+                    
+                    if (isset($_GET['error_login'])) {
+                        ?>
+
+        <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
+
+            <?php
+                            $error_login = $_GET['error_login'];
+        
+                            $error_messages_login = explode(',', $error_login);
+                        
+                            foreach($error_messages_login as $err_log){
+                                echo '<div class="text-white" style="font-size: 12px;">' . $err_log . '</div>';
+                            }
+        
+                            echo '<script>
+                                    isOpenModalLogin = true;
+                                </script>';
+        
+                            ?>
+        </div>
+
+        <?php
+        
+                        }
+                    
+                    ?>
+        <div class="modal-login card" style="height: 24rem !important;">
             <div class="card-header d-flex align-items-center justify-content-between px-4 py-2">
                 <span class="fs-5">Login</span>
                 <svg id="btn-close-login-x" class="cursor-pointer" style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -250,18 +355,18 @@
                 </svg>
             </div>
             <div class="card-body px-4 d-flex flex-column border justify-content-center">
-                <form class="d-flex flex-column">
+                <form class="d-flex flex-column" action="auth/login.php" method="post">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Alamat Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input name="email" type="email" class="form-control" id="exampleInputEmail1">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input name="password" type="password" class="form-control" id="exampleInputPassword1">
                     </div>
                     <div class="flex align-items-center py-2">
-                        <div id="btn-modal-close" class="btn btn-secondary px-4">Close</div>
-                        <button type="submit" class="btn btn-primary px-4">Masuk</button>
+                        <!-- <div id="btn-modal-close-login" class="btn btn-secondary px-4">Close</div> -->
+                        <button name="login" type="submit" class="btn btn-primary px-4">Masuk</button>
                     </div>
                 </form>
             </div>
@@ -270,6 +375,21 @@
 
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/custom.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        if (isOpenModalRegister) {
+            document.getElementById("btn-modal-register").click();
+        }
+
+        if (isOpenModalLogin) {
+            document.getElementById("btn-modal-login").click();
+        }
+
+    });
+    </script>
+
 </body>
 
 </html>
