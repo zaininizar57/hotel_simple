@@ -4,6 +4,8 @@
 
     if (empty($_SESSION['auth'])) {
         header('Location: auth/login.php');
+    }else if($_SESSION['auth']['role_id'] !== '1'){
+        header('Location: auth/login.php');
     }
 
 ?>
@@ -24,16 +26,16 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="../">
                 <img width="40" src="../assets/images/hotel-logo.png" alt="logo-hotel">
-                <span class="fw-bold">Admin | Hotel</span>
+                <span class="ms-2 fw-bold">Admin | Hotel</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            </button> -->
+            <div class="" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
@@ -55,7 +57,7 @@
             </div>
         </div>
     </nav>
-    <div class="d-flex border-top flex-column flex-shrink-0 p-3 text-white bg-dark"
+    <div class="d-flex border-top flex-column flex-shrink-0 p-3 text-white bg-secondary"
         style="width: 280px; min-height: 95vh;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32">

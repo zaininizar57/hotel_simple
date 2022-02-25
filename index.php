@@ -139,10 +139,10 @@
     <br>
     <br>
 
-    <div class="container">
+    <div class="container-fluid">
         <h5>Recomended</h5>
         <hr>
-        <div class="row mx-4 d-flex justify-content-center">
+        <div class="row d-flex justify-content-center">
             <div class="card p-0 me-4 mt-4" style="width: 24rem;">
                 <img src="assets/images/ralph-ravi-kayden-FqqiAvJejto-unsplash (1).jpg" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -258,28 +258,6 @@
                 }
             
             ?>
-        <?php 
-
-if (isset($_GET['response'])) {
-    ?>
-
-        <div class="alert alert-success" style="width: 32rem;">
-            <?php
-
-                    $response = $_GET['response'];
-                    
-                    echo '<div class="capitalize" style="font-size: 12px;">' . $response . '</div>';
-
-                    echo '<script>
-                            isOpenModalRegister = true;
-                        </script>';
-
-                        ?>
-        </div>
-        <?php
-                }
-            
-            ?>
         <div class="modal-register card">
             <div class="card-header d-flex align-items-center justify-content-between px-4 py-2">
                 <span class="fs-5">Registrasi</span>
@@ -318,34 +296,46 @@ if (isset($_GET['response'])) {
 
 
     <div class="container-modal-login" id="modal-login">
-        <?php 
+        <?php  if (isset($_GET['response'])) : ?>
+
+            <div class="alert alert-success" style="width: 32rem;">
+                <?php
+
+                    $response = $_GET['response'];
                     
-                    if (isset($_GET['error_login'])) {
-                        ?>
+                    echo '<div class="capitalize" style="font-size: 12px;">' . $response . '</div>';
 
-        <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
+                    echo '<script>
+                            isOpenModalLogin = true;
+                        </script>';
 
-            <?php
-                            $error_login = $_GET['error_login'];
-        
-                            $error_messages_login = explode(',', $error_login);
-                        
-                            foreach($error_messages_login as $err_log){
-                                echo '<div class="text-white" style="font-size: 12px;">' . $err_log . '</div>';
-                            }
-        
-                            echo '<script>
-                                    isOpenModalLogin = true;
-                                </script>';
-        
-                            ?>
-        </div>
+                ?>
+            </div>
 
-        <?php
-        
-                        }
-                    
-                    ?>
+        <?php endif; ?>
+
+        <?php  if (isset($_GET['error_login'])) : ?>
+
+            <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
+
+                <?php
+                
+                    $error_login = $_GET['error_login'];
+
+                    $error_messages_login = explode(',', $error_login);
+                
+                    foreach($error_messages_login as $err_log){
+                        echo '<div class="text-white" style="font-size: 12px;">' . $err_log . '</div>';
+                    }
+
+                    echo '<script>
+                            isOpenModalLogin = true;
+                        </script>';
+
+                ?>
+            </div>
+
+        <?php endif; ?>
         <div class="modal-login card" style="height: 24rem !important;">
             <div class="card-header d-flex align-items-center justify-content-between px-4 py-2">
                 <span class="fs-5">Login</span>
