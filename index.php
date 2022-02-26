@@ -4,6 +4,14 @@
 
 ?>
 
+<?php 
+
+    require_once 'connection.php';
+    $sql = "SELECT * FROM kamar";
+    $result = mysqli_query($conn, $sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -143,46 +151,24 @@
         <h5>Recomended</h5>
         <hr>
         <div class="row d-flex justify-content-center">
+            <?php if ($result->num_rows > 0): ?>
+            <?php $no = 1; ?>
+            <?php while($row = $result->fetch_assoc()): ?>
             <div class="card p-0 me-4 mt-4" style="width: 24rem;">
-                <img src="assets/images/ralph-ravi-kayden-FqqiAvJejto-unsplash (1).jpg" class="card-img-top" alt="...">
+                <img src="<?= 'assets/images/kamar/' . $row['foto'] ?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
+                    <h5 class="card-title"><?= $row['title'] ?></h5>
+                    <p class="card-text"><?= substr($row['deskripsi'], 0, 40) . '....' ?></p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
-            <div class="card me-4 p-0 mt-4" style="width: 24rem;">
-                <img src="assets/images/ralph-ravi-kayden-FqqiAvJejto-unsplash (1).jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <div class="card me-4 p-0 mt-4" style="width: 24rem;">
-                <img src="assets/images/ralph-ravi-kayden-FqqiAvJejto-unsplash (1).jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <div class="card me-4 p-0 mt-4" style="width: 24rem;">
-                <img src="assets/images/ralph-ravi-kayden-FqqiAvJejto-unsplash (1).jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
+            <?php $no++; ?>
+            <?php endwhile; ?>
+            <?php else: ?>
+            <h1>Data Kosong</h1>
+            <?php endif; ?>
+
+            <?php $conn->close(); ?>
         </div>
     </div>
 
@@ -298,8 +284,8 @@
     <div class="container-modal-login" id="modal-login">
         <?php  if (isset($_GET['response'])) : ?>
 
-            <div class="alert alert-success" style="width: 32rem;">
-                <?php
+        <div class="alert alert-success" style="width: 32rem;">
+            <?php
 
                     $response = $_GET['response'];
                     
@@ -310,15 +296,15 @@
                         </script>';
 
                 ?>
-            </div>
+        </div>
 
         <?php endif; ?>
 
         <?php  if (isset($_GET['error_login'])) : ?>
 
-            <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
+        <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
 
-                <?php
+            <?php
                 
                     $error_login = $_GET['error_login'];
 
@@ -333,7 +319,7 @@
                         </script>';
 
                 ?>
-            </div>
+        </div>
 
         <?php endif; ?>
         <div class="modal-login card" style="height: 24rem !important;">
