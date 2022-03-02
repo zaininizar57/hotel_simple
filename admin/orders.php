@@ -4,7 +4,11 @@
 
 <?php 
 
-    $sql = "SELECT * FROM orders.*, users.nama_lengkap INNER JOIN users ON orders.user_id = users.id";
+    $sql = "SELECT orders.*, users.nama_lengkap, kamar.title
+            FROM ((orders
+            INNER JOIN users ON orders.user_id = users.id)
+            INNER JOIN kamar ON orders.kamar_id = kamar.id);";
+            
     $result = mysqli_query($conn, $sql);
 
 ?>
@@ -16,6 +20,7 @@
         <thead>
             <tr>
                 <th scope="col">No</th>
+                <th scope="col">Act</th>
                 <th scope="col">Nama Tamu</th>
                 <th scope="col">Nama Kamar</th>
                 <th scope="col">Jumlah Hari</th>
@@ -32,13 +37,38 @@
             <?php while($row = $result->fetch_assoc()): ?>
             <tr>
                 <th scope="row"><?= $no ?></th>
-                <td><?= $row['user_id'] ?></td>
-                <td><?= $row['kamar_id'] ?></td>
+                <td>
+                    <div class="dropdown">
+                        <div onclick="actShow()" class="badge bg-primary dropdown-toggle" type="button" id="btn-act"
+                            aria-expanded="false">
+                            act
+                        </div>
+                        <ul class="dropdown-menu" id="act">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </td>
+                <td><?= $row['nama_lengkap'] ?></td>
+                <td><?= $row['title'] ?></td>
                 <td><?= $row['day_total'] ?></td>
                 <td><?= $row['price_total'] ?></td>
-                <td><?= $row['payed_status'] ?></td>
+                <td>
+                    <?php if($row['payed_status']): ?>
+                    <span class="badge bg-success">Payed</span>
+                    <?php else: ?>
+                    <span class="badge bg-warning">Proccess</span>
+                    <?php endif; ?>
+                </td>
                 <td><?= $row['check_in'] ?></td>
-                <td><?= $row['check_out'] ?></td>
+                <td>
+                    <?php if($row['check_out'] == ''): ?>
+                    <span class="badge bg-warning">none</span>
+                    <?php else: ?>
+                    <?= $row['check_out'] ?>
+                    <?php endif; ?>
+                </td>
                 <td><?= $row['created_at'] ?></td>
             </tr>
             <?php $no++; ?>

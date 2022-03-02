@@ -32,4 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
   btnModalCloseLoginX.addEventListener("click", () => {
     modalLogin.classList.toggle("active");
   });
+
+  const btnAct = document.getElementById("btn-act");
+  const act = document.getElementById("act");
 });
