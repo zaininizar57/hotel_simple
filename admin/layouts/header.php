@@ -16,16 +16,20 @@
     $menu_users_class = 'nav-link text-white';
     $menu_settings_class = 'nav-link text-white';
     
-    if ($_GET['menu'] === 'admin_panel') {
+    if(isset($_GET['menu'])){
+        if ($_GET['menu'] === 'admin_panel') {
+            $menu_admin_panel_class = 'nav-link active text-white';
+        }else if($_GET['menu'] == 'v_kamar'){
+            $menu_kamar_class = 'nav-link active text-white';
+        }else if($_GET['menu'] == 'v_orders'){
+            $menu_orders_class = 'nav-link active text-white';
+        }else if($_GET['menu'] == 'v_users'){
+            $menu_users_class = 'nav-link active text-white';
+        }else if($_GET['menu'] == 'v_settings'){
+            $menu_settings_class = 'nav-link active text-white';
+        }
+    }else {
         $menu_admin_panel_class = 'nav-link active text-white';
-    }else if($_GET['menu'] == 'v_kamar'){
-        $menu_kamar_class = 'nav-link active text-white';
-    }else if($_GET['menu'] == 'v_orders'){
-        $menu_orders_class = 'nav-link active text-white';
-    }else if($_GET['menu'] == 'v_users'){
-        $menu_users_class = 'nav-link active text-white';
-    }else if($_GET['menu'] == 'v_settings'){
-        $menu_settings_class = 'nav-link active text-white';
     }
 
 ?>
@@ -109,7 +113,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="orders.php?menu=v_users" class="<?= $menu_users_class ?>">
+                    <a href="users.php?menu=v_users" class="<?= $menu_users_class ?>">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#grid" />
                         </svg>
@@ -117,7 +121,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="orders.php?menu=v_settings" class="<?= $menu_settings_class ?>">
+                    <a href="settings.php?menu=v_settings" class="<?= $menu_settings_class ?>">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#people-circle" />
                         </svg>
