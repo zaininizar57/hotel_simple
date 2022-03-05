@@ -38,7 +38,7 @@
                                 echo 'Admin';
                                 break;
                             case '2':
-                                echo 'Petugas';
+                                echo 'Resepsionis';
                                 break;
                             case '3':
                                 echo 'User';

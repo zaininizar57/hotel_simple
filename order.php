@@ -3,7 +3,7 @@
 <?php 
 
     if (empty($_SESSION['auth'])) {
-        header('Location: auth/login.php');
+        header('Location: index.php?response=silahkan login terlebih dahulu');
     }
 
     if (isset($_GET['kamar_id'])) {

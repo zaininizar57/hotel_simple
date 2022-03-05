@@ -4,32 +4,24 @@
 
     if (empty($_SESSION['auth'])) {
         header('Location: auth/login.php');
-    }else if($_SESSION['auth']['role_id'] !== '1'){
+    }else if($_SESSION['auth']['role_id'] !== '2'){
         header('Location: auth/login.php');
     }
 
     $menu = '';
 
-    $menu_admin_panel_class = 'nav-link text-white';
+    $menu_resepsionis_panel_class = 'nav-link text-white';
     $menu_kamar_class = 'nav-link text-white';
     $menu_orders_class = 'nav-link text-white';
     $menu_users_class = 'nav-link text-white';
     $menu_settings_class = 'nav-link text-white';
     
     if(isset($_GET['menu'])){
-        if ($_GET['menu'] === 'admin_panel') {
-            $menu_admin_panel_class = 'nav-link active text-white';
-        }else if($_GET['menu'] == 'v_kamar'){
-            $menu_kamar_class = 'nav-link active text-white';
-        }else if($_GET['menu'] == 'v_orders'){
-            $menu_orders_class = 'nav-link active text-white';
-        }else if($_GET['menu'] == 'v_users'){
-            $menu_users_class = 'nav-link active text-white';
-        }else if($_GET['menu'] == 'v_settings'){
-            $menu_settings_class = 'nav-link active text-white';
+        if ($_GET['menu'] === 'resepsionis_panel') {
+            $menu_resepsionis_panel_class = 'nav-link active text-white';
         }
     }else {
-        $menu_admin_panel_class = 'nav-link active text-white';
+        $menu_resepsionis_panel_class = 'nav-link active text-white';
     }
 
 ?>
@@ -42,6 +34,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/DataTables/DataTables-1.11.5/css/dataTables.bootstrap5.min.css">
     <title>Admin | Panel</title>
@@ -84,48 +77,16 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>
-                <span class="fs-4">Admin Menu</span>
+                <span class="fs-4">Menu</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li>
-                    <a href="admin_panel.php?menu=admin_panel" class="<?= $menu_admin_panel_class ?>">
+                    <a href="resepsionis_panel.php?menu=resepsionis_panel" class="<?= $menu_resepsionis_panel_class ?>">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2" />
                         </svg>
-                        Admin Panel
-                    </a>
-                </li>
-                <li>
-                    <a href="v_kamar.php?menu=v_kamar" class="<?= $menu_kamar_class ?>">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table" />
-                        </svg>
-                        Kamar
-                    </a>
-                </li>
-                <li>
-                    <a href="orders.php?menu=v_orders" class="<?= $menu_orders_class ?>">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table" />
-                        </svg>
-                        Orders
-                    </a>
-                </li>
-                <li>
-                    <a href="users.php?menu=v_users" class="<?= $menu_users_class ?>">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#grid" />
-                        </svg>
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a href="settings.php?menu=v_settings" class="<?= $menu_settings_class ?>">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#people-circle" />
-                        </svg>
-                        Settings
+                        Resepsionis Panel
                     </a>
                 </li>
             </ul>

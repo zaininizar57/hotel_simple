@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../assets/DataTables/DataTables-1.11.5/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/DataTables/DataTables-1.11.5/css/jquery.dataTables.min.css">
     <title>Hotel</title>
 </head>
 

@@ -1,5 +1,3 @@
-<?php  require_once 'layouts/header.php'; ?>
-
 <?php  require_once '../connection.php'; ?>
 
 <?php 
@@ -13,6 +11,22 @@
 
 ?>
 <div class="container py-4 ">
+
+    <?php if (isset($_GET['resp'])) : ?>
+    <?php 
+        $resp = $_GET['resp'];
+    ?>
+    <script>
+    Swal.fire({
+        title: 'Success!',
+        text: '<?= $resp ?>',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    })
+    </script>
+    <?php endif; ?>
+
+
     <div class="badge bg-primary d-flex justify-content-between px-4 py-2">
         <h4>Semua Order</h4>
     </div>
@@ -40,14 +54,14 @@
                 <th scope="row"><?= $no ?></th>
                 <td>
                     <div class="dropdown">
-                        <div onclick="actShow()" class="badge bg-primary dropdown-toggle" type="button" id="btn-act"
-                            aria-expanded="false">
+                        <div class="badge bg-primary dropdown-toggle" type="button" id="btn-act">
                             act
                         </div>
                         <ul class="dropdown-menu" id="act">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="act.php?act=set_payed&id=<?= $row['id'] ?> ">Set
+                                    Payed</a></li>
+                            <li><a class="dropdown-item" href="#">Set CheckOut</a></li>
+                            <li><a class="dropdown-item" href="#">Delete</a></li>
                         </ul>
                     </div>
                 </td>
@@ -82,7 +96,3 @@
         </tbody>
     </table>
 </div>
-
-<?php  require_once 'layouts/footer.php'; ?>
-
-<?php  require_once 'layouts/footer.php'; ?>
