@@ -5,59 +5,7 @@ $sql = "SELECT * FROM kamar";
 $result = mysqli_query($conn, $sql);
 
 ?>
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div
-                style="background-image: url('assets/images/edvin-johansson-rlwE8f8anOc-unsplash.jpg'); background-position: center; background-size: cover; height: 80vh; width: 100vw;">
-            </div>
-
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Fasilitas</h5>
-                <p>Fasilitas yang lengkap, tersedia kolam renang</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div
-                style="background-image: url('assets/images/egor-myznik-zi7RndSr1Cw-unsplash.jpg'); background-position: center; background-size: cover; height: 80vh; width: 100vw;">
-            </div>
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Kamar yang nyaman</h5>
-                <p>Suasana dalam kamar yang sangat nyaman</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div
-                style="background-image: url('assets/images/marten-bjork-n_IKQDCyrG0-unsplash.jpg'); background-position: center; background-size: cover; height: 80vh; width: 100vw;">
-            </div>
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Malam Indah</h5>
-                <p>Pemandangan malam yang sangat indah</p>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-<br>
-<br>
-<br>
-
-<div class="row my-4 d-flex mx-4">
+<div class="row my-4 d-flex mx-4 pt-4">
     <div class="card bg-primary text-white">
         <div class="card-body">
             <h5 class="card-title text-center my-4">Cari kamar yang kamu inginkan</h5>
@@ -86,6 +34,7 @@ $result = mysqli_query($conn, $sql);
             </div>
             <div class="card-body">
                 <h5 class="card-title"><?= $row['title'] ?></h5>
+                <p class="card-text">RP<?= $row['price'] ?>/Hari</p>
                 <p class="card-text"><?= substr($row['deskripsi'], 0, 40) . '....' ?><a href="#">More</a></p>
                 <a href="order.php?kamar_id=<?= $row['id'] ?>" class="px-4 btn btn-primary">Order</a>
             </div>
@@ -116,25 +65,23 @@ $result = mysqli_query($conn, $sql);
 
     <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
 
-            <?php
+        <?php
+                    $errors = $_GET['errors'];
 
-                $errors = $_GET['errors'];
+                    $error_messages = explode(',', $errors);
 
-                $error_messages = explode(',', $errors);
+                    foreach($error_messages as $err){
+                        echo '<div class="text-white capitalize" style="font-size: 12px;">' . $err . '</div>';
+                    }
 
-                foreach($error_messages as $err){
-                    echo '<div class="text-white capitalize" style="font-size: 12px;">' . $err . '</div>';
-                }
+                    echo '<script>
+                            isOpenModalRegister = true;
+                        </script>';
 
-                echo '<script>
-                        isOpenModalRegister = true;
-                    </script>';
+                    ?>
+    </div>
 
-                ?>
-                
-            </div>
-
-            <?php
+    <?php
 
                 }
             

@@ -2,6 +2,12 @@
 
 <?php 
 
+    if (empty($_SESSION['auth'])) {
+        header('Location: auth/login.php');
+    }else if($_SESSION['auth']['role_id'] !== '2'){
+        header('Location: auth/login.php');
+    }
+
     $sql = "SELECT orders.*, users.nama_lengkap, kamar.title
             FROM ((orders
             INNER JOIN users ON orders.user_id = users.id)
@@ -60,8 +66,8 @@
                         <ul class="dropdown-menu" id="act">
                             <li><a class="dropdown-item" href="act.php?act=set_payed&id=<?= $row['id'] ?> ">Set
                                     Payed</a></li>
-                            <li><a class="dropdown-item" href="#">Set CheckOut</a></li>
-                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                            <li><a class="dropdown-item" href="act.php?act=set_check_out&id=<?= $row['id'] ?> ">Set CheckOut</a></li>
+                            <li><a class="dropdown-item" href="act.php?act=delete&id=<?= $row['id'] ?> ">Delete</a></li>
                         </ul>
                     </div>
                 </td>

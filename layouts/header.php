@@ -7,8 +7,6 @@
 <?php 
 
     require_once 'connection.php';
-    $sql = "SELECT * FROM kamar";
-    $result = mysqli_query($conn, $sql);
 
 ?>
 
@@ -51,10 +49,15 @@
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Cari Hotel</a>
+                        <a class="nav-link" href="cari_kamar.php">Cari Kamar</a>
                     </li>
+                    <?php if(isset($_SESSION['auth'])): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="kamarku.php">Kamarku</a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Contact</a>
+                        <a href="terms_and_conditions.php" class="nav-link">Terms and Conditions</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">

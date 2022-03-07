@@ -7,9 +7,11 @@
     }
 
     if (isset($_GET['kamar_id'])) {
-        $id = $_GET['kamar_id'];
+        $kamar_id = $_GET['kamar_id'];
 
-        $sql = "SELECT * FROM kamar WHERE id = " . $id;
+        $order_id = rand(0000, 9999);
+
+        $sql = "SELECT * FROM kamar WHERE id = " . $kamar_id;
         $result = $conn->query($sql);
         $data = $result->fetch_assoc();
 
@@ -20,25 +22,31 @@
                 $user_id = $_SESSION['auth']['id'];
                 $kamar_id = $_GET['kamar_id'];
                 $day_total = $_POST['jumlah_hari'];
-                $price_total = $_POST['jumlah_hari'] * $data['price'];
+                $jumlah_kamar = $_POST['jumlah_kamar'];
+                $price_total = ($_POST['jumlah_hari'] * $data['price']) * $jumlah_kamar;
                 $check_in = date('Y-m-d H:i:s');
                 $sql = "INSERT INTO orders (
+                    id,
                     user_id,
                     kamar_id,
                     day_total,
+                    jumlah_kamar,
                     price_total,
                     check_in
                 ) VALUES (
+                    '" . $order_id . "',
                     '" . $user_id . "',
                     '" . $kamar_id . "',
                     '" . $day_total . "',
+                    '" . $jumlah_kamar . "',
                     '" . $price_total . "',
                     '" . $check_in . "'
                 )";
 
                 $result = $conn->query($sql);
                 if ($result) {
-                    $succ = "Berhasil Memesan Kamar";
+                    $succ_alert = "<span>Berhasil Memesan Kamar</span> <a href='resepsionis/act.php?act=cetak&id=". $order_id ."' class='alert-link'>Cetak</a>";
+                    $succ_message = "Berhasil Memesan Kamar";
                 }else {
                     $err = "Gagal";
                 }
@@ -71,19 +79,19 @@
                 </script>"; ?>
             </div>
             <?php  endif; ?>
-            <?php  if (isset($succ)): ?>
+            <?php  if (isset($succ_alert) && isset($succ_message)): ?>
             <br>
-            <div class="alert alert-success" style="width: 100%;">
-                <?= $succ ?>
-                <?= "<script>
+            <div class="alert alert-success d-flex justify-content-between" style="width: 100%;">
+                <?= $succ_alert ?>
+            </div>
+            <?= "<script>
                     Swal.fire({
                         title: 'Success!',
-                        text: '". $succ ."',
+                        text: '". $succ_message ."',
                         icon: 'success',
                         confirmButtonText: 'Ok'
                       })
                 </script>"; ?>
-            </div>
             <?php  endif; ?>
             <div class="card-body">
                 <div class="text-center">
@@ -97,6 +105,8 @@
                     <div class="mb-3 text-center">
                         <label for="exampleInputEmail1" class="form-label">Jumlah Hari</label>
                         <input name="jumlah_hari" type="number" class="form-control">
+                        <label for="exampleInputEmail1" class="form-label">Jumlah Kamar</label>
+                        <input name="jumlah_kamar" type="number" class="form-control">
                     </div>
                     <button name="check_in" type="submit" class="btn btn-primary">Check In</button>
                 </form>

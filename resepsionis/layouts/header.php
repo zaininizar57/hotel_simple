@@ -37,7 +37,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/DataTables/DataTables-1.11.5/css/dataTables.bootstrap5.min.css">
-    <title>Admin | Panel</title>
+    <title>Resepsionis | Panel</title>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="../">
                 <img width="40" src="../assets/images/hotel-logo.png" alt="logo-hotel">
-                <span class="ms-2 fw-bold">Admin | Hotel</span>
+                <span class="ms-2 fw-bold">Resepsionis | Hotel</span>
             </a>
             <div class="" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
