@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="../assets/DataTables/DataTables-1.11.5/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/DataTables/DataTables-1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
     <title>Hotel</title>
 </head>
 
@@ -52,9 +51,9 @@
                         <a class="nav-link" href="cari_kamar.php">Cari Kamar</a>
                     </li>
                     <?php if(isset($_SESSION['auth'])): ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="kamarku.php">Kamarku</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kamarku.php">Kamarku</a>
+                    </li>
                     <?php endif; ?>
                     <li class="nav-item">
                         <a href="terms_and_conditions.php" class="nav-link">Terms and Conditions</a>

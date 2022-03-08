@@ -1,0 +1,23 @@
+{
+  "name": "hotel_simple",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaininizar57/hotel_simple.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zaininizar57/hotel_simple/issues"
+  },
+  "homepage": "https://github.com/zaininizar57/hotel_simple#readme",
+  "dependencies": {
+    "tiny-slider": "^2.9.4"
+  }
+}

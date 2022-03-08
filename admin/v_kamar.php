@@ -16,20 +16,20 @@
                     
         if (isset($_GET['err'])) : ?>
 
-            <div class="px-4 mt-2 py-2 rounded shadow" style="width: 100%; background-color: #ff8589;">
+    <div class="px-4 mt-2 py-2 rounded shadow" style="width: 100%; background-color: #ff8589;">
 
-                <?php
+        <?php
 
-                    $err = $_GET['err'];
+            $err = $_GET['err'];
 
-                    $error_messages = explode(',', $err);
+            $error_messages = explode(',', $err);
 
-                    foreach($error_messages as $err){
-                        echo '<div class="text-white capitalize" style="font-size: 12px;">' . $err . '</div>';
-                    }
+            foreach($error_messages as $err){
+                echo '<div class="text-white capitalize" style="font-size: 12px;">' . $err . '</div>';
+            }
 
-                ?>
-            </div>
+        ?>
+    </div>
 
     <?php endif; ?>
 
@@ -37,20 +37,20 @@
                     
         if (isset($_GET['res'])) : ?>
 
-            <div class="px-4 mt-2 py-2 rounded shadow bg-success" style="width: 100%;">
+    <div class="px-4 mt-2 py-2 rounded shadow bg-success" style="width: 100%;">
 
-                <?php
+        <?php
 
-                    $res = $_GET['res'];
+            $res = $_GET['res'];
 
-                    $res_messages = explode(',', $res);
+            $res_messages = explode(',', $res);
 
-                    foreach($res_messages as $res){
-                        echo '<div class="text-white capitalize" style="font-size: 12px;">' . $res . '</div>';
-                    }
+            foreach($res_messages as $res){
+                echo '<div class="text-white capitalize" style="font-size: 12px;">' . $res . '</div>';
+            }
 
-                ?>
-            </div>
+        ?>
+    </div>
 
     <?php endif; ?>
 
@@ -73,52 +73,87 @@
             <tr>
                 <th scope="row"><?= $no ?></th>
                 <td>
-                <div class="dropdown">
-                    <span class="badge bg-primary dropdown-toggle" role="button" id="btn-act" data-bs-toggle="dropdown">
-                        Act
-                    </span>
-                    <ul class="dropdown-menu" id="act">
-                        <li>
-                            <span style="cursor: pointer;" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $no ?>">Edite</span>
-                        </li>
-                        <li><a class="dropdown-item" href="act.php?act=delete&id=<?= $row['id'] ?>">Hapus</a></li>
-                    </ul>
-                </div>
+                    <div class="dropdown">
+                        <span class="badge bg-primary dropdown-toggle" role="button" id="btn-act"
+                            data-bs-toggle="dropdown">
+                            Act
+                        </span>
+                        <ul class="dropdown-menu" id="act">
+                            <li>
+                                <span style="cursor: pointer;" class="dropdown-item" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalEdite<?= $no ?>">Edite</span>
+                            </li>
+                            <li>
+                                <a href="tambah_fasilitas_kamar.php?id=<?= $row['id'] ?>&menu=v_kamar"
+                                    style="cursor: pointer;" class="dropdown-item">Tambah Fasilitas</a>
+                            </li>
+                            <li><span class="dropdown-item" onclick="alertConfirm()">Hapus</span></li>
+                        </ul>
+                    </div>
                 </td>
+                <script>
+                const alertConfirm = () => {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.href = 'act.php?act=delete&id=<?= $row['id'] ?>';
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+                }
+                </script>
                 <!-- Start Modal -->
-                <div class="modal fade" id="exampleModal<?= $no ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModalEdite<?= $no ?>" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="act.php?act=update&id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
-                                    <input name="title" value="<?= $row['title'] ?>" type="text" class="form-control" id="title">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="price" class="form-label">Price</label>
-                                    <input name="price" value="<?= $row['price'] ?>" type="number" class="form-control" id="price">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="foto" class="form-label">Photo</label>
-                                    <input name="photo" value="<?= $row['foto'] ?>" type="hidden">
-                                    <img class="mb-3" width="50" src="../assets/images/kamar/<?= $row['foto'] ?>" />
-                                    <input name="new_photo" type="file" class="form-control" id="foto">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10"><?= $row['deskripsi'] ?></textarea>
-                                </div>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="act.php?act=update_kamar&id=<?= $row['id'] ?>" method="post"
+                                    enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input name="title" value="<?= $row['title'] ?>" type="text"
+                                            class="form-control" id="title">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="price" class="form-label">Price</label>
+                                        <input name="price" value="<?= $row['price'] ?>" type="number"
+                                            class="form-control" id="price">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="foto" class="form-label">Photo</label>
+                                        <input name="photo" value="<?= $row['foto'] ?>" type="hidden">
+                                        <img class="mb-3" width="50" src="../assets/images/kamar/<?= $row['foto'] ?>" />
+                                        <input name="new_photo" type="file" class="form-control" id="foto">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" name="description" id="description" cols="30"
+                                            rows="10"><?= $row['deskripsi'] ?></textarea>
+                                    </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button name="update" type="submit" class="btn btn-primary">Update</button>
+                                <button name="update_kamar" type="submit" class="btn btn-primary">Update</button>
                             </div>
-                        </form>
+                            </form>
                         </div>
                     </div>
                 </div>

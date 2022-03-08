@@ -66,8 +66,11 @@
                         <ul class="dropdown-menu" id="act">
                             <li><a class="dropdown-item" href="act.php?act=set_payed&id=<?= $row['id'] ?> ">Set
                                     Payed</a></li>
-                            <li><a class="dropdown-item" href="act.php?act=set_check_out&id=<?= $row['id'] ?> ">Set CheckOut</a></li>
-                            <li><a class="dropdown-item" href="act.php?act=delete&id=<?= $row['id'] ?> ">Delete</a></li>
+                            <li><a class="dropdown-item" href="act.php?act=set_check_out&id=<?= $row['id'] ?> ">Set
+                                    CheckOut</a></li>
+                            <li><a class="dropdown-item" href="act.php?act=cetak&id=<?= $row['id'] ?> ">Print</a></li>
+                            <li><span style="cursor: pointer;" class="dropdown-item"
+                                    onclick="alertConfirm()">Delete</span></li>
                         </ul>
                     </div>
                 </td>
@@ -75,6 +78,29 @@
                 <td><?= $row['title'] ?></td>
                 <td><?= $row['day_total'] ?></td>
                 <td><?= $row['price_total'] ?></td>
+                <script>
+                const alertConfirm = () => {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.href = 'act.php?act=delete&id=<?= $row['id'] ?>';
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+                }
+                </script>
                 <td>
                     <?php if($row['payed_status']): ?>
                     <span class="badge bg-success">Payed</span>
@@ -101,4 +127,5 @@
             <?php $conn->close(); ?>
         </tbody>
     </table>
+
 </div>

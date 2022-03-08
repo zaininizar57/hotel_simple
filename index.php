@@ -74,7 +74,7 @@ $result = mysqli_query($conn, $sql);
 <br>
 
 <div class="container-fluid">
-    <h5>Recomended</h5>
+    <h5>Rekomendasi Kamar</h5>
     <hr>
     <div class="row d-flex justify-content-center">
         <?php if ($result->num_rows > 0): ?>
@@ -96,9 +96,59 @@ $result = mysqli_query($conn, $sql);
         <h1>Data Kosong</h1>
         <?php endif; ?>
 
-        <?php $conn->close(); ?>
     </div>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<?php 
+
+$sql = "SELECT * FROM fasilitas_umum";
+$result = mysqli_query($conn, $sql);
+
+?>
+
+<div class="container-fluid">
+    <h5>Fasilitas Umum</h5>
+    <hr>
+    <div class="slider-fasilitas-umum">
+        <?php if ($result->num_rows > 0): ?>
+        <?php $no = 1; ?>
+        <?php while($row = $result->fetch_assoc()): ?>
+        <div class="mx-4 card" style="width: 18rem;">
+            <div onclick="showImage('assets/images/fasilitas_umum/<?= $row['photo'] ?>')"
+                style="height: 16rem; background-size: cover; background-image: url(assets/images/fasilitas_umum/<?= $row['photo'] ?>)">
+            </div>
+            <div class="card-body">
+                <h6 class="card-title"><?= $row['title'] ?></h6>
+                <p class="card-text"><?= substr($row['description'], 0, 60) . '....' ?></p>
+            </div>
+        </div>
+
+
+
+        <?php $no++; ?>
+        <?php endwhile; ?>
+        <?php else: ?>
+        <h1>Data Kosong</h1>
+        <?php endif; ?>
+    </div>
+</div>
+
+
+<script>
+const showImage = (url) => {
+    Swal.fire({
+        imageUrl: url,
+    })
+}
+</script>
+
 
 <br>
 <br>
@@ -116,7 +166,7 @@ $result = mysqli_query($conn, $sql);
 
     <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
 
-            <?php
+        <?php
 
                 $errors = $_GET['errors'];
 
@@ -131,10 +181,10 @@ $result = mysqli_query($conn, $sql);
                     </script>';
 
                 ?>
-                
-            </div>
 
-            <?php
+    </div>
+
+    <?php
 
                 }
             
@@ -182,15 +232,15 @@ $result = mysqli_query($conn, $sql);
     <div class="alert alert-success" style="width: 32rem;">
         <?php
 
-                    $response = $_GET['response'];
-                    
-                    echo '<div class="capitalize" style="font-size: 12px;">' . $response . '</div>';
+                            $response = $_GET['response'];
+                            
+                            echo '<div class="capitalize" style="font-size: 12px;">' . $response . '</div>';
 
-                    echo '<script>
-                            isOpenModalLogin = true;
-                        </script>';
+                            echo '<script>
+                                    isOpenModalLogin = true;
+                                </script>';
 
-                ?>
+                        ?>
     </div>
 
     <?php endif; ?>
@@ -254,6 +304,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isOpenModalLogin) {
         document.getElementById("btn-modal-login").click();
     }
+
+});
+</script>
+<script type="module">
+import {
+    tns
+} from "./node_modules/tiny-slider/src/tiny-slider.js";
+
+var slider = tns({
+    "container": '.slider-fasilitas-umum',
+    "items": 3,
+    "mouseDrag": true,
+    "slideBy": "page",
+    "swipeAngle": false,
+    "speed": 400,
+    "loop": true,
+    "nav": false,
+    "controls": false,
 
 });
 </script>

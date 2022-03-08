@@ -59,12 +59,14 @@
 
     ?>
 
-<div class="container-fluid py-4 my-4">
+<div class="container py-4 my-4">
     <div class="d-flex justify-content-center flex-column align-items-center">
+        <h3 class="card-title"><?= $data['title'] ?></h3>
         <div class="card p-0 me-4 mt-4">
             <div
-                style="height: 50vh; width: 50vw; background-size: cover; background-image: url('<?= 'assets/images/kamar/' . $data['foto'] ?>')">
+                style="height: 80vh; width: 80vw; background-size: cover; background-image: url('<?= 'assets/images/kamar/' . $data['foto'] ?>')">
             </div>
+
             <?php  if (isset($err)): ?>
             <br>
             <div class="alert alert-danger" style="width: 100%;">
@@ -93,9 +95,50 @@
                       })
                 </script>"; ?>
             <?php  endif; ?>
+        </div>
+    </div>
+</div>
+
+<?php 
+
+    $sql = "SELECT * FROM fasilitas_kamar WHERE kamar_id = " . $_GET['kamar_id'];
+    $result = mysqli_query($conn, $sql);
+
+?>
+
+<div class="mx-auto mt-2" style="width: 80vw;">
+    <div class="text-center">
+        <h5>Fasilitas Kamar</h5>
+        <hr>
+        <?php if ($result->num_rows > 0): ?>
+        <div class="slider-fasilitas-umum">
+            <?php $no = 1; ?>
+            <?php while($row = $result->fetch_assoc()): ?>
+            <div class="mx-4 card" style="width: 18rem;">
+                <div
+                    style="height: 16rem; background-size: cover; background-image: url(assets/images/fasilitas_umum/<?= $row['photo'] ?>)">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title"><?= $row['title'] ?></h6>
+                    <p class="card-text"><?= substr($row['description'], 0, 60) . '....' ?></p>
+                </div>
+            </div>
+            <?php $no++; ?>
+            <?php endwhile; ?>
+        </div>
+        <?php else: ?>
+        <div style="width: 100%;" class="row">
+            <h3 class="text-center">Coming Soon</h3>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<div class="container mb-4 mt-4">
+    <div class="d-flex justify-content-center flex-column align-items-center">
+        <div class="card p-0" style="width: 80vw;">
             <div class="card-body">
                 <div class="text-center">
-                    <h5 class="card-title"><?= $data['title'] ?></h5>
                     <p class="card-text"><?= $data['deskripsi'] ?></p>
                     <p class="card-text">RP<?= $data['price'] ?>/Malam</p>
                 </div>
@@ -117,9 +160,34 @@
     </div>
 </div>
 
-
 <?php
     }
 ?>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<script type="module">
+import {
+    tns
+} from "./node_modules/tiny-slider/src/tiny-slider.js";
+
+var slider = tns({
+    "container": '.slider-fasilitas-umum',
+    "items": 3,
+    "mouseDrag": true,
+    "slideBy": "page",
+    "swipeAngle": false,
+    "speed": 400,
+    "loop": true,
+    "nav": false,
+    "controls": false,
+
+});
+</script>
 
 <?php require_once 'layouts/footer.php' ?>

@@ -14,7 +14,7 @@
     $menu_kamar_class = 'nav-link text-white';
     $menu_orders_class = 'nav-link text-white';
     $menu_users_class = 'nav-link text-white';
-    $menu_settings_class = 'nav-link text-white';
+    $menu_fasilitas_umum_class = 'nav-link text-white';
     
     if(isset($_GET['menu'])){
         if ($_GET['menu'] === 'admin_panel') {
@@ -25,8 +25,8 @@
             $menu_orders_class = 'nav-link active text-white';
         }else if($_GET['menu'] == 'v_users'){
             $menu_users_class = 'nav-link active text-white';
-        }else if($_GET['menu'] == 'v_settings'){
-            $menu_settings_class = 'nav-link active text-white';
+        }else if($_GET['menu'] == 'v_fasilitas_umum'){
+            $menu_fasilitas_umum_class = 'nav-link active text-white';
         }
     }else {
         $menu_admin_panel_class = 'nav-link active text-white';
@@ -105,6 +105,14 @@
                     </a>
                 </li>
                 <li>
+                    <a href="fasilitas_umum.php?menu=v_fasilitas_umum" class="<?= $menu_fasilitas_umum_class ?>">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#people-circle" />
+                        </svg>
+                        Fasilitas Umum
+                    </a>
+                </li>
+                <li>
                     <a href="orders.php?menu=v_orders" class="<?= $menu_orders_class ?>">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#table" />
@@ -118,14 +126,6 @@
                             <use xlink:href="#grid" />
                         </svg>
                         Users
-                    </a>
-                </li>
-                <li>
-                    <a href="settings.php?menu=v_settings" class="<?= $menu_settings_class ?>">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#people-circle" />
-                        </svg>
-                        Settings
                     </a>
                 </li>
             </ul>
