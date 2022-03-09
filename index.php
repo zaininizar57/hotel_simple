@@ -57,14 +57,16 @@ $result = mysqli_query($conn, $sql);
 <br>
 <br>
 
-<div class="row my-4 d-flex mx-4">
-    <div class="card bg-primary text-white">
-        <div class="card-body">
-            <h5 class="card-title text-center my-4">Cari kamar yang kamu inginkan</h5>
-            <form action="" method="get" class="input-group mb-3 px-4">
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                <button class="btn btn-secondary text-white px-4" type="button">Cari</button>
-            </form>
+<div class="container">
+    <div class="row my-4 d-flex mx-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title text-center my-4">Cari kamar yang kamu inginkan</h5>
+                <form action="" method="get" class="input-group mb-3 px-4">
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <button class="btn btn-secondary text-white px-4" type="button">Cari</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -73,7 +75,7 @@ $result = mysqli_query($conn, $sql);
 <br>
 <br>
 
-<div class="container-fluid">
+<div class="container">
     <h5>Rekomendasi Kamar</h5>
     <hr>
     <div class="row d-flex justify-content-center">
@@ -113,7 +115,7 @@ $result = mysqli_query($conn, $sql);
 
 ?>
 
-<div class="container-fluid">
+<div class="container">
     <h5>Fasilitas Umum</h5>
     <hr>
     <div class="slider-fasilitas-umum">
