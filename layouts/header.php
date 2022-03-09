@@ -1,14 +1,6 @@
-<?php 
+<?php session_start(); ?>
 
-    session_start();
-
-?>
-
-<?php 
-
-    require_once 'connection.php';
-
-?>
+<?php require_once 'connection.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +48,7 @@
                     </li>
                     <?php endif; ?>
                     <li class="nav-item">
-                        <a href="terms_and_conditions.php" class="nav-link">Terms and Conditions</a>
+                        <a href="about.php" class="nav-link">About</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">

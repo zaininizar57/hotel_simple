@@ -11,7 +11,7 @@
 <div class="container py-4 ">
     <div class="badge bg-primary d-flex justify-content-between px-4 py-2">
         <h4>Semua User</h4>
-        <a href="v_tambah_kamar.php?menu=v_kamar" class="btn btn-secondary">Registrasi User</a>
+        <!-- <a href="v_tambah_kamar.php?menu=v_kamar" class="btn btn-secondary">Registrasi User</a> -->
     </div>
     <table class="table table-striped table-hover mt-4">
         <thead>

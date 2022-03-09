@@ -116,7 +116,7 @@
             <?php while($row = $result->fetch_assoc()): ?>
             <div class="mx-4 card" style="width: 18rem;">
                 <div
-                    style="height: 16rem; background-size: cover; background-image: url(assets/images/fasilitas_umum/<?= $row['photo'] ?>)">
+                    style="height: 16rem; background-position: center; background-size: cover; background-image: url('assets/images/fasilitas_kamar/<?= $row['photo'] ?>')">
                 </div>
                 <div class="card-body">
                     <h6 class="card-title"><?= $row['title'] ?></h6>
@@ -183,7 +183,7 @@ var slider = tns({
     "slideBy": "page",
     "swipeAngle": false,
     "speed": 400,
-    "loop": true,
+    // "loop": true,
     "nav": false,
     "controls": false,
 

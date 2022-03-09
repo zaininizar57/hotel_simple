@@ -85,11 +85,33 @@
                                 <span style="cursor: pointer;" class="dropdown-item" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalEdite<?= $no ?>">Edite</span>
                             </li>
-                            <li><a class="dropdown-item"
-                                    href="act.php?act=delete_fasilitas_umum&id=<?= $row['id'] ?>">Hapus</a></li>
+                            <li><span onclick="alertConfirm()" class="dropdown-item">Hapus</span></li>
                         </ul>
                     </div>
                 </td>
+                <script>
+                const alertConfirm = () => {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.href = 'act.php?act=delete_fasilitas_umum&id=<?= $row['id'] ?>';
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+                }
+                </script>
                 <!-- Start Modal -->
                 <div class="modal fade" id="exampleModalEdite<?= $no ?>" tabindex="-1"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">

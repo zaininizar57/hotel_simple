@@ -1,25 +1,26 @@
 <?php  require_once 'layouts/header.php'; ?>
+
 <?php  require_once '../connection.php'; ?>
 
 <?php 
 
-    $sql = "SELECT * FROM kamar";
+    $sql = "SELECT * FROM fasilitas_kamar WHERE kamar_id = " . $_GET['id'];
     $result = mysqli_query($conn, $sql);
 
 ?>
+
 <div class="container py-4 ">
     <div class="badge bg-primary d-flex justify-content-between px-4 py-2">
-        <h4>Semua Kamar</h4>
-        <a href="v_tambah_kamar.php?menu=v_kamar" class="btn btn-secondary">Tambah Kamar</a>
+        <h4>Fasilitas Kamar</h4>
+        <a href="tambah_fasilitas_kamar.php?id=<?= $_GET['id'] ?>&menu=v_kamar" class="btn btn-secondary">Tambah
+            Fasilitas Kamar</a>
     </div>
-    <?php 
-                    
-        if (isset($_GET['err'])) : ?>
+
+    <?php if (isset($_GET['err'])) : ?>
 
     <div class="px-4 mt-2 py-2 rounded shadow" style="width: 100%; background-color: #ff8589;">
-
         <?php
-
+            
             $err = $_GET['err'];
 
             $error_messages = explode(',', $err);
@@ -33,14 +34,12 @@
 
     <?php endif; ?>
 
-    <?php 
-                    
-        if (isset($_GET['res'])) : ?>
+    <?php if (isset($_GET['res'])) : ?>
 
     <div class="px-4 mt-2 py-2 rounded shadow bg-success" style="width: 100%;">
 
         <?php
-
+            
             $res = $_GET['res'];
 
             $res_messages = explode(',', $res);
@@ -59,8 +58,7 @@
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">Act</th>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
+                <th scope="col">Nama Fasilitas</th>
                 <th scope="col">Foto</th>
                 <th scope="col">Deskripsi</th>
                 <th scope="col">Created at</th>
@@ -83,80 +81,49 @@
                                 <span style="cursor: pointer;" class="dropdown-item" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalEdite<?= $no ?>">Edite</span>
                             </li>
-                            <!-- <li>
-                                <a href="tambah_fasilitas_kamar.php?id=<?= $row['id'] ?>&menu=v_kamar"
-                                    style="cursor: pointer;" class="dropdown-item">Tambah Fasilitas</a>
-                            </li> -->
-                            <li>
-                                <a href="fasilitas_kamar.php?id=<?= $row['id'] ?>&menu=v_kamar" style="cursor: pointer;"
-                                    class="dropdown-item">Fasilitas</a>
+                            <li><span style="cursor: pointer;"
+                                    onclick="alertConfirm('act.php?kamar_id=<?= $_GET['id'] ?>&act=delete_fasilitas_kamar&id=<?= $row['id'] ?>')"
+                                    class="dropdown-item">Hapus</span>
                             </li>
-                            <li><span style="cursor: pointer;" class="dropdown-item"
-                                    onclick="alertConfirm()">Hapus</span></li>
                         </ul>
                     </div>
                 </td>
-                <script>
-                const alertConfirm = () => {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.href = 'act.php?act=delete&id=<?= $row['id'] ?>';
-
-                            Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                            )
-                        }
-                    })
-                }
-                </script>
                 <!-- Start Modal -->
                 <div class="modal fade" id="exampleModalEdite<?= $no ?>" tabindex="-1"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edite Kamar</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Edite Fasilitas Kamar</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="act.php?act=update_kamar&id=<?= $row['id'] ?>" method="post"
-                                    enctype="multipart/form-data">
+                                <form
+                                    action="act.php?act=update_fasilitas_kamar&id=<?= $row['id'] ?>&kamar_id=<?= $_GET['id'] ?>"
+                                    method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Title</label>
                                         <input name="title" value="<?= $row['title'] ?>" type="text"
                                             class="form-control" id="title">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="price" class="form-label">Price</label>
-                                        <input name="price" value="<?= $row['price'] ?>" type="number"
-                                            class="form-control" id="price">
-                                    </div>
-                                    <div class="mb-3">
                                         <label for="foto" class="form-label">Photo</label>
-                                        <input name="photo" value="<?= $row['foto'] ?>" type="hidden">
-                                        <img class="mb-3" width="50" src="../assets/images/kamar/<?= $row['foto'] ?>" />
+                                        <input name="photo" value="<?= $row['photo'] ?>" type="hidden">
+                                        <img class="mb-3" width="50"
+                                            src="../assets/images/fasilitas_kamar/<?= $row['photo'] ?>" />
                                         <input name="new_photo" type="file" class="form-control" id="foto">
                                     </div>
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Description</label>
                                         <textarea class="form-control" name="description" id="description" cols="30"
-                                            rows="10"><?= $row['deskripsi'] ?></textarea>
+                                            rows="10"><?= $row['description'] ?></textarea>
                                     </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button name="update_kamar" type="submit" class="btn btn-primary">Update</button>
+                                <button name="update_fasilitas_kamar" type="submit"
+                                    class="btn btn-primary">Update</button>
                             </div>
                             </form>
                         </div>
@@ -164,11 +131,10 @@
                 </div>
                 <!-- End Modal -->
                 <td><?= $row['title'] ?></td>
-                <td><?= $row['price'] ?></td>
                 <td>
                     <img data-bs-toggle="modal" data-bs-target="#exampleModal<?= $no; ?>" width="30" height="30"
-                        class="rounded-circle cursor-pointer" src="<?= '../assets/images/kamar/' . $row['foto'] ?>"
-                        alt="">
+                        class="rounded-circle cursor-pointer"
+                        src="<?= '../assets/images/fasilitas_kamar/' . $row['photo'] ?>" alt="">
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal<?= $no; ?>" tabindex="-1"
@@ -176,13 +142,13 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><?= $row['foto'] ?></h5>
+                                    <h5 class="modal-title" id="exampleModalLabel"><?= $row['photo'] ?></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body text-center">
                                     <img width="400" class="rounded cursor-pointer"
-                                        src="<?= '../assets/images/kamar/' . $row['foto'] ?>" alt="">
+                                        src="<?= '../assets/images/fasilitas_kamar/' . $row['photo'] ?>" alt="">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -192,7 +158,7 @@
                         </div>
                     </div>
                 </td>
-                <td><?= $row['deskripsi'] ?></td>
+                <td><?= $row['description'] ?></td>
                 <td><?= $row['created_at'] ?></td>
             </tr>
             <?php $no++; ?>
@@ -216,5 +182,27 @@ btnAct.forEach((el) => {
     });
 });
 </script>
+<script>
+const alertConfirm = (url) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = url;
 
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        }
+    })
+}
+</script>
 <?php  require_once 'layouts/footer.php'; ?>

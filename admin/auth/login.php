@@ -41,7 +41,7 @@
                     session_start();
                     $_SESSION['auth'] = $result;
                     var_dump($_SESSION['auth']);
-                    header('Location: ../admin_panel.php');
+                    header('Location: ../v_kamar.php?menu=v_kamar');
                 }
 
             }

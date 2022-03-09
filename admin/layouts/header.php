@@ -44,6 +44,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/DataTables/DataTables-1.11.5/css/dataTables.bootstrap5.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Admin | Panel</title>
 </head>
 
@@ -88,14 +89,14 @@
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-                <li>
+                <!-- <li>
                     <a href="admin_panel.php?menu=admin_panel" class="<?= $menu_admin_panel_class ?>">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2" />
                         </svg>
                         Admin Panel
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="v_kamar.php?menu=v_kamar" class="<?= $menu_kamar_class ?>">
                         <svg class="bi me-2" width="16" height="16">
