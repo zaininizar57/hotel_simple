@@ -61,8 +61,6 @@
                         <ul class="dropdown-menu" id="act">
                             <li><a class="dropdown-item" href="act.php?act=set_payed&id=<?= $row['id'] ?> ">Set
                                     Payed</a></li>
-                            <li><a class="dropdown-item" href="act.php?act=set_check_out&id=<?= $row['id'] ?> ">Set
-                                    CheckOut</a></li>
                             <li><a class="dropdown-item" href="act.php?act=cetak&id=<?= $row['id'] ?> ">Print</a></li>
                             <li><span style="cursor: pointer;" class="dropdown-item"
                                     onclick="alertConfirm()">Hapus</span></li>

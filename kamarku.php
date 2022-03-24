@@ -27,15 +27,21 @@
                 <h5 class="card-title"><?= $row['title'] ?></h5>
                 <p class="card-text">Ket Kamar: <?= $row['deskripsi'] ?></p>
                 <p class="card-text">Nama Tamu: <?= $row['nama_lengkap'] ?></p>
-                <p class="card-text">Tanggal Check in: <span class="badge bg-secondary"><?= $row['check_in'] ?></span></p>
-                <p class="card-text">Tanggal Check out: <span class="badge bg-secndary"><?= $row['check_out'] ?></span></p>
+                <p class="card-text">Tanggal Check in: <span class="badge bg-secondary"><?= $row['check_in'] ?></span>
+                </p>
+                <p class="card-text">Tanggal Check out: <span class="badge bg-secondary"><?= $row['check_out'] ?></span>
+                </p>
                 <p class="card-text">Jumlah Hari: <?= $row['day_total'] ?></p>
                 <p class="card-text">Jumlah Kamar: <?= $row['jumlah_kamar'] ?></p>
                 <p class="card-text">Total Harga: RP<?= $row['price_total'] ?></p>
                 <?php if($row['payed_status']): ?>
-                    <p class="card-text"><div class="badge bg-success">Telah di Bayar</div></p>
+                <p class="card-text">
+                <div class="badge bg-success">Telah di Bayar</div>
+                </p>
                 <?php else: ?>
-                    <p class="card-text"><div class="badge bg-warning">Belum di Bayar</div></p>
+                <p class="card-text">
+                <div class="badge bg-warning">Belum di Bayar</div>
+                </p>
                 <?php endif; ?>
                 <a href="resepsionis/act.php?act=cetak&id=<?= $row['id'] ?>" class="px-4 btn btn-primary">Cetak</a>
             </div>

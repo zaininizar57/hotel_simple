@@ -15,16 +15,22 @@
         $result = $conn->query($sql);
         $data = $result->fetch_assoc();
 
-        if (isset($_POST['check_in'])) {
+        if (isset($_POST['order'])) {
 
-            if (isset($_POST['jumlah_hari']) && $_POST['jumlah_hari'] !== '') {
+            if (isset($_POST['check_in']) && isset($_POST['check_out'])) {
                 
+                // var_dump(implode(explode('-', $_POST['check_out'])) - implode(explode('-', $_POST['check_in'])));
+
                 $user_id = $_SESSION['auth']['id'];
                 $kamar_id = $_GET['kamar_id'];
-                $day_total = $_POST['jumlah_hari'];
+                $day_total = implode(explode('-', $_POST['check_out'])) - implode(explode('-', $_POST['check_in']));
                 $jumlah_kamar = $_POST['jumlah_kamar'];
-                $price_total = ($_POST['jumlah_hari'] * $data['price']) * $jumlah_kamar;
-                $check_in = date('Y-m-d H:i:s');
+                $price_total = ($day_total * $data['price']) * $jumlah_kamar;
+                
+                $check_in = $_POST['check_in'];
+                $check_out = $_POST['check_out'];
+
+
                 $sql = "INSERT INTO orders (
                     id,
                     user_id,
@@ -32,7 +38,8 @@
                     day_total,
                     jumlah_kamar,
                     price_total,
-                    check_in
+                    check_in,
+                    check_out
                 ) VALUES (
                     '" . $order_id . "',
                     '" . $user_id . "',
@@ -40,7 +47,8 @@
                     '" . $day_total . "',
                     '" . $jumlah_kamar . "',
                     '" . $price_total . "',
-                    '" . $check_in . "'
+                    '" . $check_in . "',
+                    '" . $check_out . "'
                 )";
 
                 $result = $conn->query($sql);
@@ -146,12 +154,14 @@
                 <br>
                 <form action="" method="post" class="d-flex justify-content-center align-items-center flex-column">
                     <div class="mb-3 text-center">
-                        <label for="exampleInputEmail1" class="form-label">Jumlah Hari</label>
-                        <input name="jumlah_hari" type="number" class="form-control">
                         <label for="exampleInputEmail1" class="form-label">Jumlah Kamar</label>
                         <input name="jumlah_kamar" type="number" class="form-control">
+                        <label for="exampleInputEmail1" class="form-label">Tgl CheckIn</label>
+                        <input name="check_in" type="date" class="form-control">
+                        <label for="exampleInputEmail1" class="form-label">Tgl CheckOut</label>
+                        <input name="check_out" type="date" class="form-control">
                     </div>
-                    <button name="check_in" type="submit" class="btn btn-primary">Check In</button>
+                    <button name="order" type="submit" class="btn btn-primary">Check In</button>
                 </form>
                 <br>
                 <br>

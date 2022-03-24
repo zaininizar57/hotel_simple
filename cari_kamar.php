@@ -11,7 +11,7 @@ $result = mysqli_query($conn, $sql);
             <div class="card-body">
                 <h5 class="card-title text-center my-4">Cari kamar yang kamu inginkan</h5>
                 <form action="" method="get" class="input-group mb-3 px-4">
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <input id="search" type="text" class="form-control" aria-label="Text input with dropdown button">
                     <button class="btn btn-secondary text-white px-4" type="button">Cari</button>
                 </form>
             </div>
@@ -26,7 +26,7 @@ $result = mysqli_query($conn, $sql);
 <div class="container">
     <h5>Recomended</h5>
     <hr>
-    <div class="row d-flex justify-content-center">
+    <div id="tampil" class="row d-flex justify-content-center">
         <?php if ($result->num_rows > 0): ?>
         <?php $no = 1; ?>
         <?php while($row = $result->fetch_assoc()): ?>
@@ -204,6 +204,24 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("btn-modal-login").click();
     }
 
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#search').on('keyup', function() {
+        $.ajax({
+            type: 'POST',
+            url: 'search.php',
+            data: {
+                search: $(this).val()
+            },
+            cache: false,
+            success: function(data) {
+                $('#tampil').html(data);
+            }
+        });
+    });
 });
 </script>
 

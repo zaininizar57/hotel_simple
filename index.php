@@ -1,10 +1,12 @@
 <?php require_once 'layouts/header.php' ?>
+
 <?php 
 
-$sql = "SELECT * FROM kamar";
-$result = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM kamar";
+    $result = mysqli_query($conn, $sql);
 
 ?>
+
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -63,7 +65,7 @@ $result = mysqli_query($conn, $sql);
             <div class="card-body">
                 <h5 class="card-title text-center my-4">Cari kamar yang kamu inginkan</h5>
                 <form action="" method="get" class="input-group mb-3 px-4">
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <input id="search" type="text" class="form-control" aria-label="Text input with dropdown button">
                     <button class="btn btn-secondary text-white px-4" type="button">Cari</button>
                 </form>
             </div>
@@ -78,7 +80,7 @@ $result = mysqli_query($conn, $sql);
 <div class="container">
     <h5>Rekomendasi Kamar</h5>
     <hr>
-    <div class="row d-flex justify-content-center">
+    <div id="tampil" class="row d-flex justify-content-center">
         <?php if ($result->num_rows > 0): ?>
         <?php $no = 1; ?>
         <?php while($row = $result->fetch_assoc()): ?>
@@ -110,8 +112,8 @@ $result = mysqli_query($conn, $sql);
 
 <?php 
 
-$sql = "SELECT * FROM fasilitas_umum";
-$result = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM fasilitas_umum";
+    $result = mysqli_query($conn, $sql);
 
 ?>
 
@@ -161,11 +163,7 @@ const showImage = (url) => {
 <?php require_once 'layouts/footer.php' ?>
 
 <div class="container-modal-register" id="modal-register">
-    <?php 
-                    
-            if (isset($_GET['errors'])) {
-                ?>
-
+    <?php if (isset($_GET['errors'])) { ?>
     <div class="px-4 py-2 rounded shadow" style="width: 32rem; background-color: #ff8589;">
 
         <?php
@@ -182,15 +180,10 @@ const showImage = (url) => {
                         isOpenModalRegister = true;
                     </script>';
 
-                ?>
+            ?>
 
     </div>
-
-    <?php
-
-                }
-            
-            ?>
+    <?php } ?>
     <div class="modal-register card">
         <div class="card-header d-flex align-items-center justify-content-between px-4 py-2">
             <span class="fs-5">Registrasi</span>
@@ -325,6 +318,24 @@ var slider = tns({
     "nav": false,
     "controls": false,
 
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#search').on('keyup', function() {
+        $.ajax({
+            type: 'POST',
+            url: 'search.php',
+            data: {
+                search: $(this).val()
+            },
+            cache: false,
+            success: function(data) {
+                $('#tampil').html(data);
+            }
+        });
+    });
 });
 </script>
 
