@@ -13,7 +13,9 @@
 
 ?>
 <div class="container-fluid my-4">
-    <h5>Kamar PesananKu</h5>
+    <div class="px-4 py-4">
+        <h5 class="text-center">Kamar PesananKu</h5>
+    </div>
     <hr>
     <div class="row d-flex justify-content-center">
         <?php if ($result->num_rows > 0): ?>

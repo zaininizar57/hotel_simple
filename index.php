@@ -120,7 +120,7 @@
 <div class="container">
     <h5>Fasilitas Umum</h5>
     <hr>
-    <div class="slider-fasilitas-umum">
+    <div style="cursor: pointer;" class="slider-fasilitas-umum">
         <?php if ($result->num_rows > 0): ?>
         <?php $no = 1; ?>
         <?php while($row = $result->fetch_assoc()): ?>
@@ -149,6 +149,8 @@
 const showImage = (url) => {
     Swal.fire({
         imageUrl: url,
+        imageHeight: 500,
+        imageWidth: 500,
     })
 }
 </script>

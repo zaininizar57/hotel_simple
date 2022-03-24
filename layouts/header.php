@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-    <title>Hotel</title>
+    <title>Hotel Hebat</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
         <div class="container py-2">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img width="40" src="assets/images/hotel-logo.png" alt="logo-hotel">
-                <span class="fw-bold">Hotel</span>
+                <span class="fw-bold">Hotel Hebat</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
