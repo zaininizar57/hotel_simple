@@ -5,46 +5,66 @@
     $sql = "SELECT * FROM kamar";
     $result = mysqli_query($conn, $sql);
 
+    $sql_fasilitas = "SELECT * FROM fasilitas_umum";
+    $result_fasilitas = mysqli_query($conn, $sql_fasilitas);
+
+    $fasilitas_count = $result_fasilitas->num_rows;
+
 ?>
+
+
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
+        <?php for($i = 0; $i <= $fasilitas_count; $i++): ?>
+        <?php if($i == 0): ?>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= $i ?>" class="active"
+            aria-current="true" aria-label="Slide <?= $i ?>"></button>
+        <?php else: ?>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= $i ?>" aria-current="true"
+            aria-label="Slide <?= $i ?>"></button>
+        <?php endif; ?>
+        <?php endfor; ?>
     </div>
     <div class="carousel-inner">
+        <?php 
+
+            $sql_fasilitas = "SELECT * FROM fasilitas_umum";
+            $result_fasilitas = mysqli_query($conn, $sql_fasilitas);
+
+            $i = 0;
+            while($fasilitas = $result_fasilitas->fetch_assoc()) :
+
+        ?>
+
+        <?php if($i == 0): ?>
         <div class="carousel-item active">
             <div
-                style="background-image: url('assets/images/edvin-johansson-rlwE8f8anOc-unsplash.jpg'); background-position: center; background-size: cover; height: 80vh; width: 100vw;">
+                style="background-image: url(<?= 'assets/images/fasilitas_umum/' . $fasilitas['photo'] ?>); background-position: center; background-size: cover; height: 80vh; width: 100vw;">
             </div>
 
             <div class="carousel-caption d-none d-md-block">
-                <h5>Fasilitas</h5>
-                <p>Fasilitas yang lengkap, tersedia kolam renang</p>
+                <h5><?= $fasilitas['title'] ?></h5>
+                <p><?= $fasilitas['description'] ?></p>
             </div>
         </div>
+        <?php else: ?>
         <div class="carousel-item">
             <div
-                style="background-image: url('assets/images/egor-myznik-zi7RndSr1Cw-unsplash.jpg'); background-position: center; background-size: cover; height: 80vh; width: 100vw;">
+                style="background-image: url(<?= 'assets/images/fasilitas_umum/' . $fasilitas['photo'] ?>); background-position: center; background-size: cover; height: 80vh; width: 100vw;">
             </div>
+
             <div class="carousel-caption d-none d-md-block">
-                <h5>Kamar yang nyaman</h5>
-                <p>Suasana dalam kamar yang sangat nyaman</p>
+                <h5><?= $fasilitas['title'] ?></h5>
+                <p><?= $fasilitas['description'] ?></p>
             </div>
         </div>
-        <div class="carousel-item">
-            <div
-                style="background-image: url('assets/images/marten-bjork-n_IKQDCyrG0-unsplash.jpg'); background-position: center; background-size: cover; height: 80vh; width: 100vw;">
-            </div>
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Malam Indah</h5>
-                <p>Pemandangan malam yang sangat indah</p>
-            </div>
-        </div>
+        <?php endif; ?>
+
+        <?php 
+            $i++;
+            endwhile;
+        ?>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
