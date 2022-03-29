@@ -42,6 +42,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="cari_kamar.php">Cari Kamar</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fasilitas.php">Fasilitas</a>
+                    </li>
                     <?php if(isset($_SESSION['auth'])): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="kamarku.php">Kamarku</a>
